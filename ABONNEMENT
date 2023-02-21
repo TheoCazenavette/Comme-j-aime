@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+    parameters {
+        choice(name: 'QABONNEMENT', choices: ['OUI', 'NON'], description: 'etes-vouz satisfait de votre programme?')
+        
+        
+    }
+    stages {
+        stage('App Evaluation') {
+            steps {
+                script {
+                if (Client Information.ABONNEMENT==0){
+                    echo "Marre des programes superficiels? Voulez vous profiter d'un programme complet? Profitez de la promotion abonnement a 50%! : ${parameters.SATISFACTION}"
+                    ABONNEMENT=1
+                    }
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    echo "Build"
+                    echo "Compiling US - ABONNEMENT"
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                script {
+                    echo "Test"
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                    echo "Deploy"
+                }
+            }
+        }
+    }
+}
