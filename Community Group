@@ -4,7 +4,7 @@ pipeline {
         choice(name: 'COMMU_POPUP', choices: ['OUI', 'NON'], description: 'Voulez-vous acceder a la communauté?')        
     }
     stages {
-        stage('Popup Launch') {
+        stage('Lancement onglet communaute') {
             steps {
                 script {
                     echo "Lancement du siteweb communauté : ${params.COMMU_POPUP}" 
