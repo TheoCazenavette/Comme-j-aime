@@ -5,6 +5,7 @@ pipeline {
         string(name: 'NOM',  description: 'veuillez entrer votre nom')
         string(name: 'PRENOM',  description: 'veuillez entrer votre prenom')
         date(name: 'DDN',  description: 'veuillez entrer votre date de naisance')
+        int(name:'ABONNEMENT', description:'status de l'abonnement')
     }
     stages {
         stage('Username information') {
@@ -17,7 +18,7 @@ pipeline {
                     echo "Bonjour MR. ${parameters.NOM} ${parameters.PRENOM}"
                     }
                     echo "et bienvenue!"
-                    
+                    ABONNEMENT=0
                 }
             }
         }
