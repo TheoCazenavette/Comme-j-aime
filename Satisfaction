@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+    parameters {
+        choice(name: 'SATISFACTION', choices: ['OUI', 'NON'], description: 'êtes-vous satisfait de notre application?')
+        choice(name: 'NOTE_SATISFACTION', choices: ['OUI', 'NON'], description: 'Voulez-vous laisser une note de satisfaction?')
+     
+    }
+    stages {
+        stage('Évaluation de l'application ') {
+            steps {
+                script {
+                    echo "Satisfait? : ${params.SATISFACTION}"
+                    echo "Merci pour votre reponse : ${params.NOTE_SATISFACTION}"
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    echo "Build"
+                    echo "Compiling US - Évaluation de l'application "
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                script {
+                    echo "Test"
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                    echo "Deploy"
+                }
+            }
+        }
+    }
+}
