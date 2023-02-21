@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+    parameters {
+        choice(name: 'RECETTE', choices: ['OUI', 'NON'], description: 'voulez vous recevoir des propositions de recettes?')
+        choice(name: 'VEGETARIEN', choices: ['OUI', 'NON'], description: 'etes-vous vegetarien?')
+    }
+    stages {
+        stage('Recette information') {
+            steps {
+                script {
+                    echo "Voulez-vous vous inscrire dans notre newletter de recettes?: :${parameters.RECETTE}"
+                    echo " Merci d'indiquer si vous etes vegetarien :${parameters.VEGETARIEN}"
+                    echo " Merci de nous avoir donnee confiance! vous allez recevoir par mail des recettes specialement choisi pour votre regime.
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    echo "Build"
+                    echo "Compiling US - Recettes"
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                script {
+                    echo "Test"
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                    echo "Deploy"
+                }
+            }
+        }
+    }
+}
