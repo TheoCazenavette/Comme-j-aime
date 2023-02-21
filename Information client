@@ -5,12 +5,21 @@ pipeline {
         string(name: 'NOM',  description: 'veuillez entrer votre nom')
         string(name: 'PRENOM',  description: 'veuillez entrer votre prenom')
         date(name: 'DDN',  description: 'veuillez entrer votre date de naisance')
+        int(name:'TAILLE', description:'Taille du client')
+        int(name:'POIDS', description:'Poids du client')
         int(name:'ABONNEMENT', description:'status de l'abonnement')
     }
     stages {
         stage('Username information') {
             steps {
                 script {
+                    echo "Veuillez entrer vos informations:"
+                    echo " Votre nom :${parameters.NOM}"
+                    echo " Votre prenom ${parameters.PRENOM}"
+                    echo " date de naissaince ${parameters.DDN}"
+                    echo " Votre poids ${parameters.POIDS}"
+                    echo " Votre taille ${parameters.TAILLE}"
+                    
                   if (parameters.sexe=="FEMME") {
                     echo "Bonjour Mme. ${parameters.NOM} ${parameters.PRENOM}"
                     }
@@ -18,6 +27,7 @@ pipeline {
                     echo "Bonjour MR. ${parameters.NOM} ${parameters.PRENOM}"
                     }
                     echo "et bienvenue!"
+                    echo
                     ABONNEMENT=0
                 }
             }
