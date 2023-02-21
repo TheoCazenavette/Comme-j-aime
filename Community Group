@@ -1,15 +1,13 @@
 pipeline {
     agent any
     parameters {
-        choice(name: 'COMMU_POPUP', choices: ['OUI', 'NON'], description: 'Voulez-vous acceder au site communauté?')
-        
+        choice(name: 'COMMU_POPUP', choices: ['OUI', 'NON'], description: 'Voulez-vous acceder a la communauté?')        
     }
     stages {
         stage('Popup Launch') {
             steps {
                 script {
-                    echo "Lancement du siteweb communauté : ${params.COMMU_POPUP}"
- 
+                    echo "Lancement du siteweb communauté : ${params.COMMU_POPUP}" 
                 }
             }
         }
@@ -17,7 +15,7 @@ pipeline {
             steps {
                 script {
                     echo "Build"
-                    echo "Compiling US - communauté"
+                    echo "Compiling US - Communauté"
                 }
             }
         }
