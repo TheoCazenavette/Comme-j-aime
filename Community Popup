@@ -8,7 +8,7 @@ pipeline {
         stage('Popup Launch') {
             steps {
                 script {
-                    echo "Lancement du siteweb commu : ${params.COMMU_POPUP}"
+                    echo "Lancement du siteweb communauté : ${params.COMMU_POPUP}"
  
                 }
             }
