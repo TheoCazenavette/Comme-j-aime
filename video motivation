@@ -2,13 +2,13 @@ pipeline {
     agent any
     parameters {
         choice(name: 'MOTIVATION', choices: ['OUI', 'NON'], description: 'Voulez-vous vous abonnez gratuitement aux videos de motivation?')
+        }   
         
-    stages {
+        stages {
         stage('MOTIVATION') {
             steps {
                 script {
-                    echo "Merci de vous être abonné : ${params.MOTIVATION}"
-                    
+                    echo "Merci de vous être abonné : ${params.MOTIVATION}"                    
                 }
             }
         }
@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     echo "Build"
-                    echo "Compiling US - MOTIVATION"
+                    echo "Compiling US - Motivation"
                 }
             }
         }
