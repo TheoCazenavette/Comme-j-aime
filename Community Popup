@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+    parameters {
+        choice(name: 'COMMU_POPUP', choices: ['OUI', 'NON'], description: 'Voulez-vous acceder au site communauté?')
+        
+    }
+    stages {
+        stage('Popup Launch') {
+            steps {
+                script {
+                    echo "Lancement du siteweb commu : ${params.COMMU_POPUP}"
+ 
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    echo "Build"
+                    echo "Compiling US - Popup Communauté"
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                script {
+                    echo "Test"
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                    echo "Deploy"
+                }
+            }
+        }
+    }
+}
+
