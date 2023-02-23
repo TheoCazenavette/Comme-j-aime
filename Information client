@@ -1,57 +1,55 @@
 pipeline {
     agent any
     parameters {
-        choice(name: 'SEXE', choices: ['MR.', 'MME.'], description: 'veuillez entrer votre sexe')
-        string(name: 'NOM',  description: 'veuillez entrer votre nom')
-        string(name: 'PRENOM',  description: 'veuillez entrer votre prenom')
-        date(name: 'DDN',  description: 'veuillez entrer votre date de naisance')
-        int(name:'TAILLE', description:'Taille du client')
-        int(name:'POIDS', description:'Poids du client')
-        int(name:'ABONNEMENT', description:'status de l abonnement')
+        choice(name: 'SEXE', choices: ['Homme', 'Femme'], description: 'Veuillez indiquer votre sexe')
+        string(name: 'NOM',  description: 'Veuillez indiquer votre nom')
+        string(name: 'PRENOM',  description: 'Veuillez indiquer votre prénom')
+        date(name: 'DDN',  description: 'Veuillez indiquer votre date de naissance')
+        int(name:'TAILLE', description:'Veuillez indiquer votre taille (en cm)')
+        int(name:'POIDS', description:'Veuillez indiquer votre poids (en kg)')
+        booleanParam(name: 'SUBSCRIPTION', defaultValue: false, description: 'Voulez-vous vous abonner à notre programme de perte de poids?')
     }
     stages {
-        stage('Username information') {
+        stage('User Information') {
             steps {
-                script {
-                    echo "Veuillez entrer vos informations:"
-                    echo " Votre nom :${parameters.NOM}"
-                    echo " Votre prenom ${parameters.PRENOM}"
-                    echo " date de naissaince ${parameters.DDN}"
-                    echo " Votre poids ${parameters.POIDS}"
-                    echo " Votre taille ${parameters.TAILLE}"
-                    
-                    if (parameters.SEXE=="MME.") {
-                        echo "Bonjour Mme. ${parameters.NOM} ${parameters.PRENOM}"
-                    }
-                    else {
-                        echo "Bonjour MR. ${parameters.NOM} ${parameters.PRENOM}"
-                    }
-                    
-                    echo "et bienvenue!"
-                    echo
-                    ABONNEMENT=0
+                echo "Veuillez entrer vos informations:"
+                echo " Votre nom : ${params.NOM}"
+                echo " Votre prénom : ${params.PRENOM}"
+                echo " Date de naissance : ${params.DDN}"
+                echo " Votre poids : ${params.POIDS} kg"
+                echo " Votre taille : ${params.TAILLE} cm"
+                
+                def gender = ""
+                if (params.SEXE == "Femme") {
+                    gender = "Mme."
+                } else {
+                    gender = "Mr."
                 }
+                echo "Bonjour ${gender} ${params.NOM} ${params.PRENOM} et bienvenue!"
+                
+                def subscriptionMessage = ""
+                if (params.SUBSCRIPTION) {
+                    subscriptionMessage = "Merci pour votre abonnement à notre programme de perte de poids!"
+                } else {
+                    subscriptionMessage = "Vous avez choisi de ne pas vous abonner à notre programme de perte de poids."
+                }
+                echo "${subscriptionMessage}"
             }
         }
         stage('Build') {
             steps {
-                sh 'mvn clean install'
+                echo "Build"
+                echo "Compiling US - Informations de l'utilisateur"
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                echo "Test"
             }
         }
         stage('Deploy') {
             steps {
-                script {
-                    docker.withRegistry('https://registry.example.com', 'docker-credentials') {
-                        def image = docker.build("my-image:${env.BUILD_NUMBER}")
-                        image.push()
-                        docker.image("my-image:${env.BUILD_NUMBER}").run("-p 8080:8080")
-                    }
-                }
+                echo "Deploy"
             }
         }
     }
