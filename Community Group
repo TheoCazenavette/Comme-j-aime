@@ -7,7 +7,11 @@ pipeline {
         stage('Lancement onglet communaute') {
             steps {
                 script {
-                    echo "Lancement du siteweb communauté : ${params.COMMU_POPUP}" 
+                    if (params.COMMU_POPUP == 'OUI') {
+                        sh "firefox -new-window https://example.com/community"
+                    } else {
+                        echo "Communauté non sélectionnée"
+                    }
                 }
             }
         }
@@ -35,4 +39,3 @@ pipeline {
         }
     }
 }
-
