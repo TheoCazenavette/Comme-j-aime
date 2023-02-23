@@ -1,14 +1,28 @@
 pipeline {
     agent any
     parameters {
-        choice(name: 'MOTIVATION', choices: ['OUI', 'NON'], description: 'Voulez-vous vous abonnez gratuitement aux videos de motivation?')
-        }   
-        
-        stages {
-        stage('MOTIVATION') {
+        choice(name: 'MOTIVATION', choices: ['OUI', 'NON'], description: 'Voulez-vous vous abonner gratuitement aux videos de motivation?')
+    }   
+    stages {
+        stage('Motivation Subscription') {
             steps {
                 script {
-                    echo "Merci de vous être abonné : ${params.MOTIVATION}"                    
+                    if (params.MOTIVATION == "OUI") {
+                        echo "Vous êtes maintenant abonné aux vidéos de motivation!"
+                    } else {
+                        echo "Vous avez choisi de ne pas vous abonner aux vidéos de motivation."
+                    }
+                }
+            }
+        }
+        stage('Motivation Videos') {
+            when {
+                expression { params.MOTIVATION == "OUI" }
+            }
+            steps {
+                script {
+                    echo "Téléchargement des vidéos de motivation..."
+                    echo "Lecture des vidéos de motivation..."
                 }
             }
         }
