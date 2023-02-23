@@ -1,17 +1,15 @@
 pipeline {
     agent any
     parameters {
-        choice(name: 'QABONNEMENT', choices: ['OUI', 'NON'], description: 'etes-vouz satisfait de votre programme?')
-        
-        
+        choice(name: 'QABONNEMENT', type: 'choice', choices: ['OUI', 'NON'], description: 'Etes-vous satisfait de votre programme?')
     }
     stages {
-        stage('App Evaluation') {
+        stage('Promotion') {
             steps {
                 script {
-                if (Client Information.ABONNEMENT==0){
-                    echo "Marre des programes superficiels? Voulez vous profiter d'un programme complet? Profitez de la promotion abonnement a 50%! : ${parameters.SATISFACTION}"
-                    ABONNEMENT=1
+                    if (params.QABONNEMENT == 'NON') {
+                        echo "Marre des programmes superficiels? Voulez-vous profiter d'un programme complet? Profitez de la promotion abonnement à 50% : ${params.SATISFACTION}"
+                        env.ABONNEMENT = 1
                     }
                 }
             }
