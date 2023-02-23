@@ -7,7 +7,7 @@ pipeline {
         date(name: 'DDN',  description: 'veuillez entrer votre date de naisance')
         int(name:'TAILLE', description:'Taille du client')
         int(name:'POIDS', description:'Poids du client')
-        int(name:'ABONNEMENT', description:'status de l'abonnement')
+        int(name:'ABONNEMENT', description:'status de l abonnement')
     }
     stages {
         stage('Username information') {
@@ -20,12 +20,13 @@ pipeline {
                     echo " Votre poids ${parameters.POIDS}"
                     echo " Votre taille ${parameters.TAILLE}"
                     
-                  if (parameters.sexe=="FEMME") {
-                    echo "Bonjour Mme. ${parameters.NOM} ${parameters.PRENOM}"
+                    if (parameters.SEXE=="MME.") {
+                        echo "Bonjour Mme. ${parameters.NOM} ${parameters.PRENOM}"
                     }
-                  elif{
-                    echo "Bonjour MR. ${parameters.NOM} ${parameters.PRENOM}"
+                    else {
+                        echo "Bonjour MR. ${parameters.NOM} ${parameters.PRENOM}"
                     }
+                    
                     echo "et bienvenue!"
                     echo
                     ABONNEMENT=0
@@ -34,26 +35,24 @@ pipeline {
         }
         stage('Build') {
             steps {
-                script {
-                    echo "Build"
-                    echo "Compiling US - Information du client"
-                }
+                sh 'mvn clean install'
             }
         }
         stage('Test') {
             steps {
-                script {
-                    echo "Test"
-                }
+                sh 'mvn test'
             }
         }
         stage('Deploy') {
             steps {
                 script {
-                    echo "Deploy"
+                    docker.withRegistry('https://registry.example.com', 'docker-credentials') {
+                        def image = docker.build("my-image:${env.BUILD_NUMBER}")
+                        image.push()
+                        docker.image("my-image:${env.BUILD_NUMBER}").run("-p 8080:8080")
+                    }
                 }
             }
         }
     }
 }
-
