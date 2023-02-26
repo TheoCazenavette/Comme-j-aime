@@ -12,18 +12,14 @@ pipeline {
     stages {
         stage('User Information') {
             steps {
-                echo "Veuillez entrer vos informations:"
-                echo " Votre nom : ${params.NOM}"
-                echo " Votre prénom : ${params.PRENOM}"
-                echo " Date de naissance : ${params.DDN}"
-                echo " Votre taille : ${params.TAILLE} cm"
-                echo " Votre poids : ${params.POIDS} kg"
-                
                 if (params.SEXE == "Femme") {
                     echo "Bonjour Mme ${params.NOM} ${params.PRENOM} et bienvenue!"
                 } else {
                     echo "Bonjour Mr ${params.NOM} ${params.PRENOM} et bienvenue!"
                 }
+                echo " Date de naissance : ${params.DDN}"
+                echo " Votre taille : ${params.TAILLE} cm"
+                echo " Votre poids : ${params.POIDS} kg"             
                 
                 if (params.SUBSCRIPTION == false) {
                     echo "Merci pour votre abonnement à notre programme de perte de poids!"
