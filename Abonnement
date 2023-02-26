@@ -31,7 +31,6 @@ pipeline {
                 }
             }
         }
-        sleep 2
         stage('Deploy') {
             steps {
                 script {
