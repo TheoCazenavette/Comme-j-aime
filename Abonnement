@@ -19,14 +19,15 @@ pipeline {
                 script {
                     echo "Build"
                     echo "Compiling US - ABONNEMENT"
+                    sleep 2
                 }
             }
         }
-        sleep 2
         stage('Test') {
             steps {
                 script {
                     echo "Test" 
+                    sleep 2
                 }
             }
         }
