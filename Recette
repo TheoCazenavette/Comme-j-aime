@@ -1,8 +1,8 @@
 pipeline {
     agent any
     parameters {
-        choice(name: 'RECETTE', choices: ['OUI', 'NON'], description: 'voulez vous recevoir des propositions de recettes?')
-        choice(name: 'VEGETARIEN', choices: ['OUI', 'NON'], description: 'etes-vous vegetarien?')
+        choice(name: 'RECETTE', choices: ['OUI', 'NON'], description: 'Voulez vous recevoir des propositions de recettes?')
+        choice(name: 'VEGETARIEN', choices: ['OUI', 'NON'], description: 'Etes-vous vegetarien?')
     }
     stages {
         stage('Recette information') {
@@ -19,6 +19,7 @@ pipeline {
                 script {
                     echo "Build"
                     echo "Compiling US - Recettes"
+                    sleep 2
                 }
             }
         }
@@ -26,6 +27,7 @@ pipeline {
             steps {
                 script {
                     echo "Test"
+                    sleep 2
                 }
             }
         }
