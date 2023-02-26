@@ -1,0 +1,55 @@
+pipeline {
+    agent any
+    parameters {
+        int(name: 'NB_CALORIES', description: 'Quel est le nombre de calories que vous avez mangé aujorud'hui?')
+        string(name: 'OBJECTIF', description: 'Quel est l'objectif de calories')
+    }   
+    stages {
+        stage('Motivation Subscription') {
+            steps {
+                script {
+                    if (params.MOTIVATION == "OUI") {
+                        echo "Vous etes maintenant abonne aux videos de motivation!"
+                    } else {
+                        echo "Vous avez choisi de ne pas vous abonner aux videos de motivation."
+                    }
+                }
+            }
+        }
+        stage('Motivation Videos') {
+            when {
+                expression { params.MOTIVATION == "OUI" }
+            }
+            steps {
+                script {
+                    echo "Telechargement des videos de motivation..."
+                    echo "Lecture des videos de motivation..."
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    echo "Build"
+                    echo "Compiling US - Macronutriment"
+                    sleep 2
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                script {
+                    echo "Test"
+                    sleep 2
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                    echo "Deploy"
+                }
+            }
+        }
+    }
+}
