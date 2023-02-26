@@ -1,12 +1,12 @@
 pipeline {
     agent any
     parameters {
-        choice(name: 'SEXE', choices: ['Homme', 'Femme'], description: 'Veuillez indiquer votre sexe')
         string(name: 'NOM',  description: 'Veuillez indiquer votre nom')
         string(name: 'PRENOM',  description: 'Veuillez indiquer votre prénom')
-        date(name: 'DDN',  description: 'Veuillez indiquer votre date de naissance')
-        int(name:'TAILLE', description:'Veuillez indiquer votre taille (en cm)')
-        int(name:'POIDS', description:'Veuillez indiquer votre poids (en kg)')
+        string(name: 'DDN',  description: 'Veuillez indiquer votre date de naissance')
+        choice(name: 'SEXE', choices: ['Homme', 'Femme'], description: 'Veuillez indiquer votre sexe')
+        string(name:'TAILLE', description:'Veuillez indiquer votre taille (en cm)')
+        string(name:'POIDS', description:'Veuillez indiquer votre poids (en kg)')
         booleanParam(name: 'SUBSCRIPTION', defaultValue: false, description: 'Voulez-vous vous abonner à notre programme de perte de poids?')
     }
     stages {
@@ -16,8 +16,8 @@ pipeline {
                 echo " Votre nom : ${params.NOM}"
                 echo " Votre prénom : ${params.PRENOM}"
                 echo " Date de naissance : ${params.DDN}"
-                echo " Votre poids : ${params.POIDS} kg"
                 echo " Votre taille : ${params.TAILLE} cm"
+                echo " Votre poids : ${params.POIDS} kg"
                 
                 def gender = ""
                 if (params.SEXE == "Femme") {
@@ -40,11 +40,13 @@ pipeline {
             steps {
                 echo "Build"
                 echo "Compiling US - Informations de l'utilisateur"
+                sleep 2
             }
         }
         stage('Test') {
             steps {
                 echo "Test"
+                sleep 2
             }
         }
         stage('Deploy') {
