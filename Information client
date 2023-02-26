@@ -25,7 +25,7 @@ pipeline {
                 if (params.SUBSCRIPTION == false) {
                     echo "Merci pour votre abonnement à notre programme de perte de poids!"
                 } else {
-                    echo "Vous avez choisi de ne pas vous abonner à notre programme de perte de poids."
+                    echo "Vous avez choisi de ne pas vous abonner a notre programme de perte de poids."
                 }
                 }
             }   
