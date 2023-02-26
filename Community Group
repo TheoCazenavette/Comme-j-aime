@@ -8,7 +8,7 @@ pipeline {
             steps {
                 script {
                     if (params.COMMU_POPUP == 'OUI') {
-                        sh "firefox -new-window https://example.com/community"
+                        echo "Google -new-window https://example.com/community"
                     } else {
                         echo "Communauté non sélectionnée"
                     }
