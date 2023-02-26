@@ -26,6 +26,7 @@ pipeline {
                 script {
                     echo "Build"
                     echo "Compiling US - Suivi perte de poids"
+                    sleep 2
                 }
             }
         }
@@ -33,6 +34,7 @@ pipeline {
             steps {
                 script {
                     echo "Test"
+                    sleep 2
                 }
             }
         }
