@@ -1,29 +1,39 @@
 pipeline {
     agent any
     parameters {
-        int(name: 'NB_CALORIES', description: 'Quel est le nombre de calories que vous avez mangé aujorud'hui?')
-        string(name: 'OBJECTIF', description: 'Quel est l'objectif de calories')
+        int(name: 'CALORIES', description: 'Quel est le nombre de calories que vous avez mangé ?')
+        int(name: 'PROTEINE, description: 'Quel est le nombre de protéine que vous avez mangé ?')
+        int(name: 'GLUCIDE, description: 'Quel est le nombre de glucides que vous avez mangé ?')
+        int(name: 'LIPIDE, description: 'Quel est le nombre de lipides que vous avez mangé ?')
     }   
     stages {
-        stage('Motivation Subscription') {
+        stage('RAPPORT CALORIQUE- Petit dejeuner') {
             steps {
                 script {
-                    if (params.MOTIVATION == "OUI") {
-                        echo "Vous etes maintenant abonne aux videos de motivation!"
-                    } else {
-                        echo "Vous avez choisi de ne pas vous abonner aux videos de motivation."
-                    }
+                    echo " Caloriess ingerees : ${params.CALORIES}" 
+                    echo " Proteines ingerees : ${params.PROTEINE}"
+                    echo " Glucides ingerees : ${params.GLUCIDE}"
+                    echo " Lipides ingerees : ${params.LIPIDE}"
                 }
             }
         }
-        stage('Motivation Videos') {
-            when {
-                expression { params.MOTIVATION == "OUI" }
-            }
+        stage('RAPPORT CALORIQUE- Dejeuner') {
             steps {
                 script {
-                    echo "Telechargement des videos de motivation..."
-                    echo "Lecture des videos de motivation..."
+                    echo " Caloriess ingerees : ${params.CALORIES}" 
+                    echo " Proteines ingerees : ${params.PROTEINE}"
+                    echo " Glucides ingerees : ${params.GLUCIDE}"
+                    echo " Lipides ingerees : ${params.LIPIDE}"
+                }
+            }
+        }
+        stage('RAPPORT CALORIQUE- Diner') {
+            steps {
+                script {
+                    echo " Caloriess ingerees : ${params.CALORIES}" 
+                    echo " Proteines ingerees : ${params.PROTEINE}"
+                    echo " Glucides ingerees : ${params.GLUCIDE}"
+                    echo " Lipides ingerees : ${params.LIPIDE}"
                 }
             }
         }
