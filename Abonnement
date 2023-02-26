@@ -19,6 +19,7 @@ pipeline {
                 script {
                     echo "Build"
                     echo "Compiling US - ABONNEMENT"
+                    sleep 2
                 }
             }
         }
@@ -26,6 +27,7 @@ pipeline {
             steps {
                 script {
                     echo "Test"
+                    sleep 2
                 }
             }
         }
