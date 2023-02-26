@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        choice(name: 'SATISFACTION', choices: ['OUI', 'NON'], description: 'êtes-vous satisfait de notre application?')
+        choice(name: 'SATISFACTION', choices: ['OUI', 'NON'], description: 'Etes-vous satisfait de notre application?')
         choice(name: 'NOTE_SATISFACTION', choices: ['OUI', 'NON'], description: 'Voulez-vous laisser une note de satisfaction?')
      
     }
@@ -19,6 +19,7 @@ pipeline {
                 script {
                     echo "Build"
                     echo "Compiling US - Évaluation de l'application "
+                    sleep 2
                 }
             }
         }
@@ -26,6 +27,7 @@ pipeline {
             steps {
                 script {
                     echo "Test"
+                    sleep 2
                 }
             }
         }
