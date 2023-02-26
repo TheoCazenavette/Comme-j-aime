@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+    parameters {
+        string(name: 'POIDS_ACTUEL', description: 'Votre poids actuel en kg')
+        string(name: 'POIDS_CIBLE', description: 'Votre poids cible en kg')
+        string(name: 'POIDS_INITIAL', description: 'Votre poids initial en kg')
+    }
+    
+    stages {
+        stage('Suivi perte de poids') {
+            steps {
+                script {
+                    def poidsActuel = params.POIDS_ACTUEL.toInteger()
+                    def poidsCible = params.POIDS_CIBLE.toInteger()
+                    def poidsInitial = params.POIDS_INITIAL.toInteger()
+                    def perte = poidsInitial - poidsActuel
+                    def objectif = poidsActuel - poidsCible
+                    echo "Votre poids actuel : ${poidsActuel} kg"
+                    echo "Votre poids cible que vous souhaitez atteindre : ${poidsCible} kg"
+                    echo "Votre amélioration : vous avez perdu ${perte} kg et vous avez ${objectif} kg à perdre pour atteindre votre objectif."
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    echo "Build"
+                    echo "Compiling US - Suivi perte de poids"
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                script {
+                    echo "Test"
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                    echo "Deploy"
+                }
+            }
+        }
+    }
+}
