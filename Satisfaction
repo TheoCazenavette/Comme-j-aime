@@ -6,7 +6,7 @@ pipeline {
      
     }
     stages {
-        stage('Évaluation de l'application ') {
+        stage('Evaluation de l application') {
             steps {
                 script {
                     echo "Satisfait? : ${params.SATISFACTION}"
