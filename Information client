@@ -12,6 +12,7 @@ pipeline {
     stages {
         stage('User Information') {
             steps {
+                script {
                 if (params.SEXE == "Femme") {
                     echo "Bonjour Mme ${params.NOM} ${params.PRENOM} et bienvenue!"
                 } else {
@@ -26,24 +27,31 @@ pipeline {
                 } else {
                     echo "Vous avez choisi de ne pas vous abonner à notre programme de perte de poids."
                 }
-            }
+                }
+            }   
         }
         stage('Build') {
             steps {
+                script {
                 echo "Build"
                 echo "Compiling US - Informations de l'utilisateur"
                 sleep 2
+                }
             }
         }
         stage('Test') {
             steps {
+                script {
                 echo "Test"
                 sleep 2
+                }
             }
         }
         stage('Deploy') {
             steps {
+                script {
                 echo "Deploy"
+                }
             }
         }
     }
