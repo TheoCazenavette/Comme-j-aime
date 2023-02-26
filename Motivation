@@ -8,9 +8,9 @@ pipeline {
             steps {
                 script {
                     if (params.MOTIVATION == "OUI") {
-                        echo "Vous êtes maintenant abonné aux vidéos de motivation!"
+                        echo "Vous etes maintenant abonne aux videos de motivation!"
                     } else {
-                        echo "Vous avez choisi de ne pas vous abonner aux vidéos de motivation."
+                        echo "Vous avez choisi de ne pas vous abonner aux videos de motivation."
                     }
                 }
             }
@@ -21,8 +21,8 @@ pipeline {
             }
             steps {
                 script {
-                    echo "Téléchargement des vidéos de motivation..."
-                    echo "Lecture des vidéos de motivation..."
+                    echo "Telechargement des videos de motivation..."
+                    echo "Lecture des videos de motivation..."
                 }
             }
         }
