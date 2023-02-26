@@ -1,13 +1,13 @@
 pipeline {
     agent any
     parameters {
-        choice(name 'QABONNEMENT', choices: ['OUI', 'NON'], description: 'Etes-vous satisfait de votre programme?')
+        choice(name 'ABONNEMENT', choices: ['OUI', 'NON'], description: 'Etes-vous satisfait de votre programme?')
     }
     stages {
         stage('Promotion') {
             steps {
                 script {
-                    if (params.QABONNEMENT == 'NON') {
+                    if (params.ABONNEMENT == 'NON') {
                         echo "Marre des programmes superficiels? Voulez-vous profiter d'un programme complet? Profitez de la promotion abonnement à 50% : ${params.SATISFACTION}"
                         env.ABONNEMENT = 1
                     }
