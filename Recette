@@ -10,7 +10,7 @@ pipeline {
                 script {
                     echo "Voulez-vous vous inscrire dans notre newletter de recettes?: :${parameters.RECETTE}"
                     echo " Merci d'indiquer si vous etes vegetarien :${parameters.VEGETARIEN}"
-                    echo " Merci de nous avoir donnee confiance! vous allez recevoir par mail des recettes specialement choisi pour votre regime.
+                    echo " Merci de nous avoir donnee confiance! vous allez recevoir par mail des recettes specialement choisi pour votre regime."
                 }
             }
         }
