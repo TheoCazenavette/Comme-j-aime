@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        choice(QABONNEMENT, choices: ['OUI', 'NON'], description: 'Etes-vous satisfait de votre programme?')
+        choice(name 'QABONNEMENT', choices: ['OUI', 'NON'], description: 'Etes-vous satisfait de votre programme?')
     }
     stages {
         stage('Promotion') {
