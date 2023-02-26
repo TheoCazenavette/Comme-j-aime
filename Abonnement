@@ -8,7 +8,7 @@ pipeline {
             steps {
                 script {
                     if (params.ABONNEMENT == 'NON') {
-                        echo "Marre des programmes superficiels? Voulez-vous profiter d'un programme complet? Profitez de la promotion abonnement à 50% : ${params.SATISFACTION}"
+                        echo "Marre des programmes superficiels? Voulez-vous profiter d'un programme complet? Profitez de la promotion abonnement a -50% : ${params.SATISFACTION}"
                         env.ABONNEMENT = 1
                     }
                 }
