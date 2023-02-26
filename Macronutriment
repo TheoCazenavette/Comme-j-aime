@@ -2,9 +2,9 @@ pipeline {
     agent any
     parameters {
         int(name: 'CALORIES', description: 'Quel est le nombre de calories que vous avez mangé ?')
-        int(name: 'PROTEINE, description: 'Quel est le nombre de protéine que vous avez mangé ?')
-        int(name: 'GLUCIDE, description: 'Quel est le nombre de glucides que vous avez mangé ?')
-        int(name: 'LIPIDE, description: 'Quel est le nombre de lipides que vous avez mangé ?')
+        int(name: 'PROTEINE', description: 'Quel est le nombre de protéine que vous avez mangé ?')
+        int(name: 'GLUCIDE', description: 'Quel est le nombre de glucides que vous avez mangé ?')
+        int(name: 'LIPIDE', description: 'Quel est le nombre de lipides que vous avez mangé ?')
     }   
     stages {
         stage('RAPPORT CALORIQUE- Petit dejeuner') {
