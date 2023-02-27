@@ -1,0 +1,177 @@
+pipeline {
+    agent any
+    parameters {
+        string(name: 'NOM',  description: 'Veuillez indiquer votre nom')
+        string(name: 'PRENOM',  description: 'Veuillez indiquer votre prénom')
+        string(name: 'DDN',  description: 'Veuillez indiquer votre date de naissance')
+        choice(name: 'SEXE', choices: ['Homme', 'Femme'], description: 'Veuillez indiquer votre sexe')
+        string(name:'TAILLE', description:'Veuillez indiquer votre taille (en cm)')
+        string(name:'POIDS', description:'Veuillez indiquer votre poids (en kg)')
+        booleanParam(name: 'SUBSCRIPTION', defaultValue: false, description: 'Voulez-vous vous abonner à notre programme de perte de poids?')
+
+        choice(name: 'ABONNEMENT', choices: ['OUI', 'NON'], description: 'Etes-vous satisfait de votre programme?')
+
+        choice(name: 'COMMU_POPUP', choices: ['OUI', 'NON'], description: 'Voulez-vous acceder a la communauté?')
+
+        string(name: 'CALORIES', description: 'Quel est le nombre de calories que vous avez mangé ?')
+        string(name: 'PROTEINE', description: 'Quel est le nombre de protéine que vous avez mangé ?')
+        string(name: 'GLUCIDE', description: 'Quel est le nombre de glucides que vous avez mangé ?')
+        string(name: 'LIPIDE', description: 'Quel est le nombre de lipides que vous avez mangé ?')
+
+        choice(name: 'MOTIVATION', choices: ['OUI', 'NON'], description: 'Voulez-vous vous abonner gratuitement aux videos de motivation?')
+
+        choice(name: 'RECETTE', choices: ['OUI', 'NON'], description: 'Voulez vous recevoir des propositions de recettes?')
+        choice(name: 'VEGETARIEN', choices: ['OUI', 'NON'], description: 'Etes-vous vegetarien?')
+
+        choice(name: 'SATISFACTION', choices: ['OUI', 'NON'], description: 'Etes-vous satisfait de notre application?')
+        choice(name: 'NOTE_SATISFACTION', choices: ['OUI', 'NON'], description: 'Voulez-vous laisser une note de satisfaction?')
+
+        string(name: 'POIDS_ACTUEL', description: 'Votre poids actuel en kg')
+        string(name: 'POIDS_CIBLE', description: 'Votre poids cible en kg')
+        string(name: 'POIDS_INITIAL', description: 'Votre poids initial en kg')
+    }
+    stages {
+        stage('User Information') {
+            steps {
+                script {
+                if (params.SEXE == "Femme") {
+                    echo "Bonjour Mme ${params.NOM} ${params.PRENOM} et bienvenue!"
+                } else {
+                    echo "Bonjour Mr ${params.NOM} ${params.PRENOM} et bienvenue!"
+                }
+                echo " Date de naissance : ${params.DDN}"
+                echo " Votre taille : ${params.TAILLE} cm"
+                echo " Votre poids : ${params.POIDS} kg"             
+                
+                if (params.SUBSCRIPTION == false) {
+                    echo "Merci pour votre abonnement à notre programme de perte de poids!"
+                } else {
+                    echo "Vous avez choisi de ne pas vous abonner a notre programme de perte de poids."
+                }
+                }
+            }   
+        }
+
+        stage('Abonnement') {
+            steps {
+                script {
+                    if (params.ABONNEMENT == 'NON') {
+                        echo "Marre des programmes superficiels? Voulez-vous profiter d'un programme complet? Profitez de la promotion abonnement a -50% : ${params.SATISFACTION}"
+                        env.ABONNEMENT = 1
+                    }
+                }
+            }
+        }
+
+        stage('Lancement onglet communaute') {
+            steps {
+                script {
+                    if (params.COMMU_POPUP == 'OUI') {
+                        echo "https://comme-j-aime.com/community"
+                    } else {
+                        echo "Vous ne souhaitez pas acceder a la communaute"
+                    }
+                }
+            }
+        }
+
+        stage('RAPPORT CALORIQUE- Petit dejeuner') {
+            steps {
+                script {
+                    echo " Caloriess ingerees : ${params.CALORIES}" 
+                    echo " Proteines ingerees : ${params.PROTEINE}"
+                    echo " Glucides ingerees : ${params.GLUCIDE}"
+                    echo " Lipides ingerees : ${params.LIPIDE}"
+                }
+            }
+        }
+
+        stage('RAPPORT CALORIQUE- Dejeuner') {
+            steps {
+                script {
+                    echo " Caloriess ingerees : ${params.CALORIES}" 
+                    echo " Proteines ingerees : ${params.PROTEINE}"
+                    echo " Glucides ingerees : ${params.GLUCIDE}"
+                    echo " Lipides ingerees : ${params.LIPIDE}"
+                }
+            }
+        }
+
+        stage('RAPPORT CALORIQUE- Diner') {
+            steps {
+                script {
+                    echo " Caloriess ingerees : ${params.CALORIES}" 
+                    echo " Proteines ingerees : ${params.PROTEINE}"
+                    echo " Glucides ingerees : ${params.GLUCIDE}"
+                    echo " Lipides ingerees : ${params.LIPIDE}"
+                }
+            }
+        }
+
+        stage('Preparation des recettes') {
+            steps {
+                script {
+                    echo "Voulez vous vous inscrire dans notre newsletter de recettes? ${params.RECETTE}"
+                    echo " Merci d'indiquer si vous etes vegetarien :${params.VEGETARIEN}"
+                    echo " Merci de nous avoir donnee confiance! vous allez recevoir par mail des recettes specialement choisi pour votre regime."
+                }
+            }
+        }
+
+        stage('Evaluation de l application') {
+            steps {
+                script {
+                    echo "Satisfait? : ${params.SATISFACTION}"
+                    echo "Merci pour votre reponse : ${params.NOTE_SATISFACTION}"
+                }
+            }
+        }
+
+        stage('Suivi perte de poids') {
+            steps {
+                script {
+                    def poidsActuel = params.POIDS_ACTUEL.toInteger()
+                    def poidsCible = params.POIDS_CIBLE.toInteger()
+                    def poidsInitial = params.POIDS_INITIAL.toInteger()
+                    def perte = poidsInitial - poidsActuel
+                    def objectif = poidsActuel - poidsCible
+                    echo "Votre poids actuel : ${poidsActuel} kg"
+                    echo "Votre poids cible que vous souhaitez atteindre : ${poidsCible} kg"
+                    echo "Votre amélioration : vous avez perdu ${perte} kg et vous avez ${objectif} kg à perdre pour atteindre votre objectif."
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    echo "Build"
+                    echo "Compiling US - Informations de l'utilisateur"
+                    echo "Compiling US - Abonnement"
+                    echo "Compiling US - Communauté"
+                    echo "Compiling US - Macronutriment"
+                    echo "Compiling US - Recettes"
+                    echo "Compiling US - Évaluation de l'application "
+                    echo "Compiling US - Suivi perte de poids"
+                    sleep 2
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                script {
+                    echo "Test de l'application" 
+                    sleep 2
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                    echo "Deploiement de l application"
+                }
+            }
+        }
+    }
+}
